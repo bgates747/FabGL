@@ -1,5 +1,12 @@
 #include "webserver.h"
 
+// Define static IP configuration
+IPAddress local_IP(192, 168, 0, 99);
+IPAddress gateway(192, 168, 0, 1);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress primaryDNS(8, 8, 8, 8); // optional
+IPAddress secondaryDNS(8, 8, 4, 4); // optional
+
 WebServer::WebServer(const char* ssid, const char* password)
     : ssid(ssid), password(password), server(80), output26(26), output27(27), 
       output26State("off"), output27State("off"), currentTime(0), previousTime(0), timeoutTime(2000) {}
@@ -13,6 +20,12 @@ void WebServer::begin() {
 
     Serial.print("Connecting to ");
     Serial.println(ssid);
+
+    // Configure static IP
+    if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
+        Serial.println("STA Failed to configure");
+    }
+
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);

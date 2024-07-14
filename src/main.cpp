@@ -30,8 +30,8 @@ void setup() {
     // Initialize WebServer
     webServer.begin();
 
-    delay(100);
-    Serial.println("Setup done, waiting for serial connection...");
+    // delay(100);
+    // Serial.println("Setup done, waiting for serial connection...");
 }
 
 void loop() {
@@ -41,7 +41,7 @@ void loop() {
         processCommand(command);
     }
     webServer.handleClient();
-    displayCommandOptions();
+    // displayCommandOptions();
 }
 
 void initializeLEDs() {
@@ -52,6 +52,10 @@ void initializeLEDs() {
         delay(100); // Slight delay for a cooler startup effect
     }
     delay(1000); // Wait for 1 second to verify all LEDs are working
+    for (int i = 0; i < numLeds; i++) {
+        digitalWrite(ledPins[i], LOW); // Turn OFF all LEDs
+        delay(100); // Slight delay for a cooler startup effect
+    }
 }
 
 void waitForSerialConnection() {
@@ -62,7 +66,7 @@ void waitForSerialConnection() {
         digitalWrite(ledPins[0], LOW);
         delay(250);
     }
-    Serial.println("Serial connection established, starting WiFi scan...");
+    // Serial.println("Serial connection established, starting WiFi scan...");
 }
 
 void scanNetworks() {
