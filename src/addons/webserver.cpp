@@ -101,7 +101,7 @@ void WebServer::handleRequest(WiFiClient client) {
     client.println(".button { background-color: #4CAF50; border: none; color: white; padding: 16px 40px;");
     client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
     client.println(".button2 {background-color: #555555;}</style></head>");
-    client.println("<body><h1>ESP32 Web Server</h1>");
+    client.println("<body><h1>DOIT ESP32-WROOM-32 Dev Kit V1 Web Server</h1>");
 
     client.println("<p>GPIO 26 - State " + output26State + "</p>");
     if (output26State == "off") {
